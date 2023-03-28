@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const db = require("./utils/database")
+const initModels = require("./models/initModels");
 
 const PORT = 6000;
 
+initModels();
 
 db.authenticate()
     .then(() => {

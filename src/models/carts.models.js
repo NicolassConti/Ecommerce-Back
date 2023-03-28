@@ -1,4 +1,4 @@
-const { Datatypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("../utils/database");
 
 
@@ -8,14 +8,14 @@ const Cart = db.define("carts", {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Datatypes.INTEGER
+        type: DataTypes.INTEGER
     },
     userId: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     totalPrice: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 
