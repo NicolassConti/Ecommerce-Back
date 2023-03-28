@@ -1,6 +1,5 @@
 const {Sequelize} = require("sequelize");
 
-
 const db =  new Sequelize ({
     database : "ecommerce",
     port : "5432",
