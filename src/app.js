@@ -4,8 +4,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
+const errorHandlerRoute = require("./routes/errorHandler.routes");
 
-const PORT = 6000;
+
+const PORT = 4000;
 
 initModels();
 
@@ -36,6 +38,12 @@ app.get("/", (req, res) => {
 })
 
 app.use(userRoutes);
+
+errorHandlerRoute(app);
+
+app.use((error ,req ,res, next)=>{
+    res.status(400).json(error)
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el ${PORT}`);
