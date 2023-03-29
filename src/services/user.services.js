@@ -21,6 +21,24 @@ class userServices {
             throw error
         }
     }
+    static async getAll() {
+        try {
+            const result = await User.findAll()
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+    static async getUser(email) {
+        try {
+            const user = User.findOne({
+                where : {email}
+            })
+            return user;
+        } catch (error) {
+            throw error
+        }
+    }
 };
 
 
