@@ -4,14 +4,17 @@ const morgan = require("morgan");
 const cors = require("cors");
 const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
+const productRoutes = require("./routes/product.routes");
 const authRoutes = require("./routes/auth.routes");
 const errorHandlerRoute = require("./routes/errorHandler.routes");
+
 
 
 
 const PORT = 4000;
 
 initModels();
+
 
 const app = express();
 app.use(express.json());
@@ -41,6 +44,8 @@ app.get("/", (req, res) => {
 
 app.use(userRoutes);
 app.use(authRoutes);
+app.use(productRoutes);
+
 
 errorHandlerRoute(app);
 

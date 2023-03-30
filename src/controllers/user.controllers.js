@@ -1,10 +1,19 @@
 const userServices = require("../services/user.services");
+const transporter = require("../utils/mailer");
 
 const createUser = async (req, res, next) => {
     try {
         const newUser = req.body
         const result = await userServices.create(newUser)
         res.status(200).json(result)
+        await transporter.sendMail({
+            from: "continicolas6@gmail.com",
+            to: result.email,
+            subject: "Hola gato",
+            html: `Bienvenido a mi Ecommerce-Api`
+        
+        })
+     
     } catch (error) {
         next(error)
     }

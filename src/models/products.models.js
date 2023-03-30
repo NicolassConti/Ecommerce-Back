@@ -21,7 +21,7 @@ const Product = db.define("products", {
         type: DataTypes.INTEGER,
         allowNull:false
       },
-      availabeQty: {
+      availableQty: {
         type: DataTypes.STRING(15)
       },
       status: {
