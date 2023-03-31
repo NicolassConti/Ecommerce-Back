@@ -10,7 +10,7 @@ const ProductInCart = db.define("productInCarts", {
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    orderId: {
+    cartId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "order_Id",
