@@ -5,7 +5,12 @@ const cors = require("cors");
 const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
+const cartRoutes = require("./routes/cart.routes");
+const orderRoutes = require("./routes/order.routes");
+const productInOrderRoutes = require("./routes/productInOrder.routes");
+const productInCartRoutes = require("./routes/productInCart.routes");
 const authRoutes = require("./routes/auth.routes");
+
 const errorHandlerRoute = require("./routes/errorHandler.routes");
 
 
@@ -45,6 +50,10 @@ app.get("/", (req, res) => {
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(productRoutes);
+app.use(cartRoutes);
+app.use(orderRoutes);
+app.use(productInOrderRoutes);
+app.use(productInCartRoutes);
 
 
 errorHandlerRoute(app);
