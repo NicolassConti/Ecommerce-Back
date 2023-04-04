@@ -23,17 +23,30 @@ const getAllProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
     try {
-        const {id} = req.params
+        const { id } = req.params
         const data = req.body
         await productServices.update(data, id)
         res.status(204).send()
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
+
+const getProductId = async (req,res,next) => {
+    try {
+        const {id} = req.params
+        const result = await productServices.getProductUser(id)
+        res.status(200).json(result)
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 
 module.exports = {
     createProduct,
     getAllProduct,
-    updateProduct
+    updateProduct,
+    getProductId
 }

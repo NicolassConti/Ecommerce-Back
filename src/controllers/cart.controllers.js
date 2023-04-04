@@ -1,4 +1,6 @@
 const cartServices = require("../services/cart.services");
+const ProductInCart = require("../models/productInCarts.models");
+const Cart = require("../models/carts.models");
 
 
 const createdCart = async(req, res , next) =>{
@@ -18,10 +20,22 @@ const getAllCart = async(req, res, next) => {
         next(error)
     }
 }
-
-
+const addProductToCart = async(req,res,next) => {
+    try {
+        const {cartId, productId, quantity, price} = req.body
+        await ProductInCart.create ({cartId, productId, quantity, price})
+        const totalPrice = price * quantity
+        await Cart.increment({totalPrice}, {where : {id : cartId}})
+        res.json({
+            message: "product added"
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 
 module.exports = {
     createdCart,
-    getAllCart
+    getAllCart,
+    addProductToCart,
 }

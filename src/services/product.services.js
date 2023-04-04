@@ -33,6 +33,21 @@ class productServices {
             throw error
         }
     }
+   static async getProductUser(id) {
+    try {
+        const userProduct = await User.findByPk(id, {
+            attributes : ["username"],
+            include: {
+                model: Product,
+                attributes: ["name"]
+            }
+        })
+        return userProduct
+    } catch (error) {
+        throw error   
+    }
+   }
 }
+
 
 module.exports = productServices;
