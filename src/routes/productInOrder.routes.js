@@ -1,5 +1,6 @@
 const {Router} = require("express");
-const {getAllProductInOrder, createdProductInOrder } = require("../controllers/ProductInOrder.controllers")
+const {getAllProductInOrder, createdProductInOrder } = require("../controllers/ProductInOrder.controllers");
+const { createProductInOrdersValidator } = require("../validator/productInOrders.validator");
 
 
 const router = Router();
@@ -7,7 +8,7 @@ const router = Router();
 
 router.get("/api/v1/productInOrder", getAllProductInOrder)
 
-router.post("/api/v1/productInOrder", createdProductInOrder);
+router.post("/api/v1/productInOrder",createProductInOrdersValidator , createdProductInOrder);
 
 
 
