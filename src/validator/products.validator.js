@@ -26,7 +26,7 @@ const createProductValidator = [
       .withMessage("el precio debe existir")
       .notEmpty()
       .withMessage("nos se encontro un valor para el precio")
-      .isString()
+      .isNumeric()
       .withMessage("Debe de ser un numero"),
      check("availableQty", "La cantidad del producto debe existir")
       .exists()

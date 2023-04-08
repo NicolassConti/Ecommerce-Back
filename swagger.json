@@ -1,0 +1,555 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ecommerce API",
+        "description": " Una API para crear una pagina de Ecommerce usando usuarios, productos, ordenes, carritos, productos en la orden y productos en los carritos ",
+        "version": "1.4.0"
+    },
+    "paths": {
+        "/api/v1/users": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Endpoint para crear usuario",
+                "description": "Utilizando este endpoint podrás crear un nuevo usuario para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear un nuevo usuario son: username, email, password, avatar ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Endpoint para editar usuario",
+                "description": "Utilizando este endpoint podrás actualizar o editar el username, y el avatar y como parametro el id del usuario que se va a actualizar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "el id del usuario que se va actualizar"
+                    }
+                ],
+                "requestBody": {
+                    "description": "los campos para editar un usuario son: username, avatar",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "no content"
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "post": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Endpoint para crear un producto",
+                "description": "Utilizando este endpoint podrás crear un nuevo producto para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear un nuevo producto son: name, description, price, availableQty, status, userId, productImage",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createProduct"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products/{id}": {
+            "put": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Endpoint para editar producto",
+                "description": "Utilizando este endpoint podrás actualizar o editar la descripcion de un  producto, como parametro el id del producto que se va a actualizar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "el id del producto que se va actualizar"
+                    }
+                ],
+                "requestBody": {
+                    "description": "los campos para editar un producto son: descripcion",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateProduct"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "no content"
+                    }
+                }
+            }
+        },
+        "/api/v1/productInOrder": {
+            "post": {
+                "tags": [
+                    "productsInOrder"
+                ],
+                "summary": "Endpoint para crear la orden de un producto",
+                "description": "Utilizando este endpoint podrás crear una nueva orden de un producto para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear un nuevo productInOrder son: orderId, productId, quantity, price, status ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createProductInOrder"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/productInCart": {
+            "post": {
+                "tags": [
+                    "productsInCart"
+                ],
+                "summary": "Endpoint para crear la orden de un carrito",
+                "description": "Utilizando este endpoint podrás crear una nueva orden de un carrito para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear un nuevo productInCart son: cartId, productId, quantity, price, status ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createProductInCart"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/orders": {
+            "post": {
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Endpoint para crear una orden de un usuario",
+                "description": "Utilizando este endpoint podrás crear una nueva orden  para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": "los campos para crear una orden de un usuario son: totalPrice, productId, userId",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createOrder"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "OK"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cart": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Endpoint para crear un carrito",
+                "description": "Utilizando este endpoint podrás crear una nuevo carrito para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear un nuevo carrito son: userId, totalPrice",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createCart"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "product-add"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": "string",
+                                        "example": "validation error"
+                                    },
+                                    "message": "string",
+                                    "example": "Database connection error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "login": {
+                "description": "La contraseña debe tener al menos 7 ",
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "nicolas"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "nicolasconti@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "example": "hombre grande"
+                    }
+                }
+            },
+            "updateUser": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "nicolas"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "example": "hombre programador"
+                    }
+                }
+            },
+            "createProduct": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "iphone-14"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Ultimo modelo"
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 1000
+                    },
+                    "availableQty": {
+                        "type": "string",
+                        "example": "10"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "disponible"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "productImage": {
+                        "type": "string",
+                        "example": "photo-iphone"
+                    }
+                }
+            },
+            "updateProduct": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "example": "Ultimo modelo"
+                    }
+                }
+            },
+            "createProductInOrder": {
+                "type": "object",
+                "properties": {
+                    "orderId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 2000
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "disponible"
+                    }
+                }
+            },
+            "createProductInCart": {
+                "type": "object",
+                "properties": {
+                    "cartId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 5000
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "no-pagado"
+                    }
+                }
+            },
+            "createOrder": {
+                "type": "object",
+                "properties": {
+                    "totalPrice": {
+                        "type": "integer",
+                        "example": 5000
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "createCart": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "totalPrice": {
+                        "type": "integer",
+                        "example": 5000
+                    }
+                }
+            }
+        }
+    }
+}

@@ -6,7 +6,7 @@ const createdProductInCart = async(req, res , next) =>{
     try {
         const newProductInCart = req.body
         const result = await productInCartServices.create(newProductInCart)
-        res.status(200).json(result)
+        res.status(201).json(result)
     } catch (error) {
         next(error)
     }

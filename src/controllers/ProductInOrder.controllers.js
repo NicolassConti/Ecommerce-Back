@@ -5,7 +5,7 @@ const createdProductInOrder = async(req, res , next) =>{
     try {
         const newProductInOrder = req.body
         const result = await productInOrderServices.create(newProductInOrder)
-        res.status(200).json(result)
+        res.status(201).json(result)
     } catch (error) {
         next(error)
     }

@@ -2,6 +2,8 @@ const express = require("express");
 const db = require("./utils/database")
 const morgan = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
 const initModels = require("./models/initModels");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
@@ -47,6 +49,7 @@ app.get("/", (req, res) => {
     res.send("Bienvenido a mi Ecommerce")
 })
 
+app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(productRoutes);
