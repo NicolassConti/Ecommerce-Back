@@ -1,4 +1,5 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
   const authenticate = (req, res, next) =>{
     const token = req.headers["access-token"]
@@ -11,7 +12,7 @@ const jwt = require("jsonwebtoken")
         })
     }
     try {
-        const decoded = jwt.verify(token,  "NicolasConti", { algoritms:"HS512"})
+        const decoded = jwt.verify(token, process.env.JWT_SECRET , { algoritms:"HS512"})
         //console.log(decoded)
         req.user = decoded
         next()

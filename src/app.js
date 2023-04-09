@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("./utils/database")
 const morgan = require("morgan");
 const cors = require("cors");
+require("dotenv").config();
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 const initModels = require("./models/initModels");
@@ -18,7 +19,7 @@ const errorHandlerRoute = require("./routes/errorHandler.routes");
 
 
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 initModels();
 
