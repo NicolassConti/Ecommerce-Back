@@ -6,6 +6,34 @@
         "version": "1.4.0"
     },
     "paths": {
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "Endpoint para loguear a un usuario",
+                "description": "Utilizando este endpoint de tipo POST podrás loguear un usuario para la pagina de un ecommerce",
+                "requestBody": {
+                    "description": " los campos para crear loguear un usuario son: email, password",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/loggin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los usuarios"
+                    }
+                }
+            }
+        },
         "/api/v1/users": {
             "post": {
                 "tags": [
@@ -217,6 +245,32 @@
                 }
             }
         },
+        "/api/v1/products/cart/{id}": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Consulta el producto mediante el id",
+                "description": "Este endpoint de tipo GET devuelve la información de un producto mediante el id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "El id es obligatorio",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los usuarios"
+                    }
+                }
+            }
+        },
         "/api/v1/productInOrder": {
             "post": {
                 "tags": [
@@ -424,6 +478,32 @@
                 }
             }
         },
+        "/api/v1/orders/{id}": {
+            "get": {
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Consulta la orden de un usuario el id",
+                "description": "Este endpoint de tipo GET devuelve la orden de un usuario mediante su id.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "El id es obligatorio",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los usuarios"
+                    }
+                }
+            }
+        },
         "/api/v1/cart": {
             "post": {
                 "tags": [
@@ -492,10 +572,51 @@
                     }
                 }
             }
+        },
+        "/api/v1/cart/add-product": {
+            "post": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Endpoint para agregar un producto al carrito",
+                "description": "Este endpoint de tipo POST agrega un producto al carrito",
+                "requestBody": {
+                    "description": " los campos para agregar un producto al carrito son : cartId, productId, quantity, price, status",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/addProductCart"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los usuarios"
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "loggin": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "continicolas6@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "1234567"
+                    }
+                }
+            },
             "createUser": {
                 "type": "object",
                 "properties": {
@@ -666,6 +787,31 @@
                     "totalPrice": {
                         "type": "integer",
                         "example": 5000
+                    }
+                }
+            },
+            "addProductCart": {
+                "type": "object",
+                "properties": {
+                    "cartId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "price": {
+                        "type": "integer",
+                        "example": 350
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "disponible"
                     }
                 }
             }
