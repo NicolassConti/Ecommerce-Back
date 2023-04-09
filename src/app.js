@@ -47,7 +47,7 @@ db.sync({alter:true})
     })
 
 app.get("/", (req, res) => {
-    res.send("Bienvenido a mi Ecommerce")
+    res.send("Bienvenido a mi API de Ecommerce ==> https://ecommerce-api-8reh.onrender.com/api/v1/docs/")
 })
 
 app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
