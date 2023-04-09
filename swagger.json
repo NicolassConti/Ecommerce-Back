@@ -12,14 +12,14 @@
                     "users"
                 ],
                 "summary": "Endpoint para crear usuario",
-                "description": "Utilizando este endpoint podrás crear un nuevo usuario para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear un nuevo usuario para la pagina de un ecommerce",
                 "requestBody": {
                     "description": " los campos para crear un nuevo usuario son: username, email, password, avatar ",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/login"
+                                "$ref": "#/components/schemas/createUser"
                             }
                         }
                     }
@@ -58,6 +58,30 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Consulta los usuarios creados",
+                "description": "Este endpoint de tipo GET devuelve la información de todos los usuarios.",
+                "parameters": [
+                    {
+                        "name": "access-token",
+                        "in": "header",
+                        "required": true,
+                        "description": "El acces token es obligatorio",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los usuarios"
+                    }
+                }
             }
         },
         "/api/v1/users/{id}": {
@@ -66,7 +90,7 @@
                     "users"
                 ],
                 "summary": "Endpoint para editar usuario",
-                "description": "Utilizando este endpoint podrás actualizar o editar el username, y el avatar y como parametro el id del usuario que se va a actualizar",
+                "description": "Utilizando este endpoint de tipo PUT podrás actualizar o editar el username, y el avatar y como parametro el id del usuario que se va a actualizar",
                 "parameters": [
                     {
                         "name": "id",
@@ -98,7 +122,7 @@
                     "products"
                 ],
                 "summary": "Endpoint para crear un producto",
-                "description": "Utilizando este endpoint podrás crear un nuevo producto para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear un nuevo producto para la pagina de un ecommerce",
                 "requestBody": {
                     "description": " los campos para crear un nuevo producto son: name, description, price, availableQty, status, userId, productImage",
                     "required": true,
@@ -144,6 +168,21 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Consulta los productos creados",
+                "description": "Este endpoint de tipo GET devuelve la información de todos los productos.",
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los productos"
+                    }
+                }
             }
         },
         "/api/v1/products/{id}": {
@@ -152,7 +191,7 @@
                     "products"
                 ],
                 "summary": "Endpoint para editar producto",
-                "description": "Utilizando este endpoint podrás actualizar o editar la descripcion de un  producto, como parametro el id del producto que se va a actualizar",
+                "description": "Utilizando este endpoint de tipo PUT podrás actualizar o editar la descripcion de un  producto, como parametro el id del producto que se va a actualizar",
                 "parameters": [
                     {
                         "name": "id",
@@ -184,7 +223,7 @@
                     "productsInOrder"
                 ],
                 "summary": "Endpoint para crear la orden de un producto",
-                "description": "Utilizando este endpoint podrás crear una nueva orden de un producto para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear una nueva orden de un producto para la pagina de un ecommerce",
                 "requestBody": {
                     "description": " los campos para crear un nuevo productInOrder son: orderId, productId, quantity, price, status ",
                     "required": true,
@@ -230,6 +269,21 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "productsInOrder"
+                ],
+                "summary": "Consulta los productos en la orden",
+                "description": "Este endpoint de tipo GET devuelve la información de todos los productos en la orden.",
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los productos in la orden"
+                    }
+                }
             }
         },
         "/api/v1/productInCart": {
@@ -238,7 +292,7 @@
                     "productsInCart"
                 ],
                 "summary": "Endpoint para crear la orden de un carrito",
-                "description": "Utilizando este endpoint podrás crear una nueva orden de un carrito para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear una nueva orden de un carrito para la pagina de un ecommerce",
                 "requestBody": {
                     "description": " los campos para crear un nuevo productInCart son: cartId, productId, quantity, price, status ",
                     "required": true,
@@ -284,6 +338,21 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "productsInCart"
+                ],
+                "summary": "Consulta los productos en el carrito",
+                "description": "Este endpoint de tipo GET devuelve la información de todos los productos en el carrito.",
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los productos en el carrito"
+                    }
+                }
             }
         },
         "/api/v1/orders": {
@@ -292,7 +361,7 @@
                     "orders"
                 ],
                 "summary": "Endpoint para crear una orden de un usuario",
-                "description": "Utilizando este endpoint podrás crear una nueva orden  para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear una nueva orden  para la pagina de un ecommerce",
                 "requestBody": {
                     "description": "los campos para crear una orden de un usuario son: totalPrice, productId, userId",
                     "required": true,
@@ -338,6 +407,21 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Consulta las ordenes",
+                "description": "Este endpoint de tipo GET devuelve la información de todos las ordenes.",
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron las ordenes"
+                    }
+                }
             }
         },
         "/api/v1/cart": {
@@ -346,7 +430,7 @@
                     "cart"
                 ],
                 "summary": "Endpoint para crear un carrito",
-                "description": "Utilizando este endpoint podrás crear una nuevo carrito para la pagina de un ecommerce",
+                "description": "Utilizando este endpoint de tipo POST podrás crear una nuevo carrito para la pagina de un ecommerce",
                 "requestBody": {
                     "description": " los campos para crear un nuevo carrito son: userId, totalPrice",
                     "required": true,
@@ -392,13 +476,27 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "cart"
+                ],
+                "summary": "Consulta los carritos",
+                "description": "Este endpoint de tipo GET devuelve la información de todos los carritos.",
+                "responses": {
+                    "200": {
+                        "description": "Encontrados"
+                    },
+                    "404": {
+                        "description": "No Found:  Hubo un error , no se encontraron los carritos"
+                    }
+                }
             }
         }
     },
     "components": {
         "schemas": {
-            "login": {
-                "description": "La contraseña debe tener al menos 7 ",
+            "createUser": {
                 "type": "object",
                 "properties": {
                     "username": {
@@ -429,6 +527,27 @@
                     "avatar": {
                         "type": "string",
                         "example": "hombre programador"
+                    }
+                }
+            },
+            "getUser": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "nicolas"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "nicolasconti@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "example": "hombre grande"
                     }
                 }
             },
